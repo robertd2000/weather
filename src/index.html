@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/weather.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <title>Погода</title>
+</head>
+<body>
+    <div class="container">
+        <div class="container__inner">
+            <h1>Погода в городе <span class="city"></span></h1>
+            <h2 class="date"></h2>
+            <form id="form">
+                <input id="input_city" type="text">
+                <button disabled class="btn" id="btn" type="submit">Найти</button>
+            </form>
+            <div class="weather">
+                <div id="show"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

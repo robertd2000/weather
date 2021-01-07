@@ -1,0 +1,59 @@
+body {
+  background: rgb(106, 216, 219);
+  font-size: 18px;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.container__inner {
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.weather {
+  margin: 20px auto;
+}
+
+.weather div {
+  padding: 10px;
+}
+
+.btn {
+  background-color: rgb(61, 194, 199);
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  height: 35px;
+  width: 75px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn[disabled="disabled"] .bgn:disabled {
+  color: #666;
+  cursor: none;
+}
+
+#input_city {
+  height: 30px;
+  width: 300px;
+}
+
+.date {
+  color: #333;
+}
+
+.city {
+  text-decoration: underline;
+  color: red;
+}
+
+.fas {
+  color: rgb(127, 224, 195);
+}
