@@ -1,7 +1,6 @@
 import './style.css'
 import {isValid} from './utils'
 
-console.log('Hi');
 const form = document.querySelector('#form'),
     input = form.querySelector('#input_city'),
     postBtn = document.querySelector('#btn')
@@ -13,19 +12,18 @@ input.addEventListener("input", () => {
 });
 
 function showCity(city) {
-    // console.log(city.ok);
     document.querySelector('.city').innerHTML = city.name + ': '
 }
 
 function getWeather(data) {
     const date = new Date()
-    // const icon = `<i class="fas fa-cloud"></i>`
 
     const icons = {
         sun: `<i class="fas fa-sun"></i>`,
         cloudy: `<i class="fas fa-cloud"></i>`,
         rain: `<i class="fas fa-cloud-rain"></i>`,
-        selfCloud: `<i class="fas fa-cloud-sun"></i>`
+        selfCloud: `<i class="fas fa-cloud-sun"></i>`,
+        snow: `<i class="far fa-snowflake"></i>`
     }
 
     let icon;
@@ -41,6 +39,9 @@ function getWeather(data) {
         case 'Дождь'.toLocaleLowerCase():
             icon = icons.rain
             break;
+        case 'снег'.toLowerCase():
+            icon = icons.snow
+            break
         default:
             icon = icons.cloudy
     }
@@ -64,34 +65,19 @@ function getWeather(data) {
 }
 
 function fetchWeather(id) {
-    // return fetch(`http://api.openweathermap.org/data/2.5/weather?q=${id}&lang=ru&appid=a9ebdb68b0dbf40182f5638efcca3afd`)
-    //     .then(response => response.json())
-    //     // .then(data => console.log(data.name))
-    //     // .then(data => showCity(data))
-    //     .then(data => {
-    //         showCity(data)
-    //         getWeather(data)
-    //     })
-    //     .catch(e => {
-    //         console.log('Error: ' + e)
-    //     })
     return fetch(`http://api.openweathermap.org/data/2.5/weather?q=${id}&lang=ru&appid=a9ebdb68b0dbf40182f5638efcca3afd`)
         .then(response => {
             if (response.ok) {
-                // console.log(response.ok);
                 response.json()
                 .then(data => {
                     showCity(data)
                     getWeather(data)
                 })
             } else {
-                // console.log('Error: ' + e)
-                showCity('Неккоректные данные...')
-
-                // throw Error(`is not ok: ` + response.status)
+                showCity({name: '<br>Неккоректные данные... Попробуйте заново.'})
             }
         }).catch(e => {
-            console.log('Error');
+            console.log(e + 'Error');
             showCity({name: 'no data'})
         })
 }
@@ -103,8 +89,8 @@ function weatherHandler(e) {
         postBtn.disabled = true
 
         const value = input.value
+        localStorage.setItem('weather', value)
         fetchWeather(value).then(() => {
-            // console.log('object');
             postBtn.disabled = false
             input.value = ''
         }).catch(() => showCity({name: 'no data'}))
@@ -113,7 +99,6 @@ function weatherHandler(e) {
     
 }
 
+let initialValue = localStorage.getItem('weather') ? localStorage.getItem('weather').toString() : 'Chegem' 
 
-// fetchWeather('524901')
-
-window.addEventListener('load', fetchWeather('Нальчик'))
+window.addEventListener('load', fetchWeather(initialValue))
